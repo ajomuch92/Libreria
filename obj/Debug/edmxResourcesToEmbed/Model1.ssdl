@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GranFranciscanoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="campeonatos">
+    <Key>
+      <PropertyRef Name="id_campeonato" />
+    </Key>
+    <Property Name="id_campeonato" Type="int" Nullable="false" />
+    <Property Name="anio_campeonato" Type="int" Nullable="false" />
+    <Property Name="cantidad_equipos" Type="int" Nullable="false" />
+    <Property Name="id_equipo_campeon" Type="int" />
+  </EntityType>
+  <EntityType Name="equipos">
+    <Key>
+      <PropertyRef Name="id_equipo" />
+    </Key>
+    <Property Name="id_equipo" Type="int" Nullable="false" />
+    <Property Name="equipo" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="equipos_x_campeonato">
+    <Key>
+      <PropertyRef Name="id_campeonato" />
+      <PropertyRef Name="id_equipo" />
+    </Key>
+    <Property Name="id_campeonato" Type="int" Nullable="false" />
+    <Property Name="id_equipo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="equipos_x_partido">
+    <Key>
+      <PropertyRef Name="id_partido" />
+      <PropertyRef Name="id_equipo" />
+    </Key>
+    <Property Name="id_partido" Type="int" Nullable="false" />
+    <Property Name="id_equipo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="partidos">
+    <Key>
+      <PropertyRef Name="id_partido" />
+    </Key>
+    <Property Name="id_partido" Type="int" Nullable="false" />
+    <Property Name="fec_partido" Type="date" />
+    <Property Name="equipos_pasan" Type="int" Nullable="false" />
+    <Property Name="id_tipo_partido" Type="int" Nullable="false" />
+    <Property Name="id_campeonato" Type="int" Nullable="false" />
+    <Property Name="id_partido_padre" Type="int" />
+  </EntityType>
+  <EntityType Name="preguntas">
+    <Key>
+      <PropertyRef Name="id_pregunta" />
+    </Key>
+    <Property Name="id_pregunta" Type="int" Nullable="false" />
+    <Property Name="pregunta" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="respueta" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tipo_partidos">
+    <Key>
+      <PropertyRef Name="id_tipo_partido" />
+    </Key>
+    <Property Name="id_tipo_partido" Type="int" Nullable="false" />
+    <Property Name="tipo_partido" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tipo_usuarios">
+    <Key>
+      <PropertyRef Name="id_tipo_usuario" />
+    </Key>
+    <Property Name="id_tipo_usuario" Type="int" Nullable="false" />
+    <Property Name="tipo_usuario" Type="nchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuarios">
+    <Key>
+      <PropertyRef Name="id_usario" />
+    </Key>
+    <Property Name="id_usario" Type="int" Nullable="false" />
+    <Property Name="nombre_usuario" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="contrasenia" Type="nchar" MaxLength="500" Nullable="false" />
+    <Property Name="fec_registro" Type="date" Nullable="false" />
+    <Property Name="id_tipo_usuario" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_campeonatos_equipos">
+    <End Role="equipos" Type="Self.equipos" Multiplicity="0..1" />
+    <End Role="campeonatos" Type="Self.campeonatos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="equipos">
+        <PropertyRef Name="id_equipo" />
+      </Principal>
+      <Dependent Role="campeonatos">
+        <PropertyRef Name="id_equipo_campeon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_equipos_x_campeonato_campeonatos">
+    <End Role="campeonatos" Type="Self.campeonatos" Multiplicity="1" />
+    <End Role="equipos_x_campeonato" Type="Self.equipos_x_campeonato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="campeonatos">
+        <PropertyRef Name="id_campeonato" />
+      </Principal>
+      <Dependent Role="equipos_x_campeonato">
+        <PropertyRef Name="id_campeonato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_equipos_x_campeonato_equipos">
+    <End Role="equipos" Type="Self.equipos" Multiplicity="1" />
+    <End Role="equipos_x_campeonato" Type="Self.equipos_x_campeonato" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="equipos">
+        <PropertyRef Name="id_equipo" />
+      </Principal>
+      <Dependent Role="equipos_x_campeonato">
+        <PropertyRef Name="id_equipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_equipos_x_partido_equipos">
+    <End Role="equipos" Type="Self.equipos" Multiplicity="1" />
+    <End Role="equipos_x_partido" Type="Self.equipos_x_partido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="equipos">
+        <PropertyRef Name="id_equipo" />
+      </Principal>
+      <Dependent Role="equipos_x_partido">
+        <PropertyRef Name="id_equipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_equipos_x_partido_partidos">
+    <End Role="partidos" Type="Self.partidos" Multiplicity="1" />
+    <End Role="equipos_x_partido" Type="Self.equipos_x_partido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="partidos">
+        <PropertyRef Name="id_partido" />
+      </Principal>
+      <Dependent Role="equipos_x_partido">
+        <PropertyRef Name="id_partido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_partidos_campeonatos">
+    <End Role="campeonatos" Type="Self.campeonatos" Multiplicity="1" />
+    <End Role="partidos" Type="Self.partidos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="campeonatos">
+        <PropertyRef Name="id_campeonato" />
+      </Principal>
+      <Dependent Role="partidos">
+        <PropertyRef Name="id_campeonato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_partidos_partidos">
+    <End Role="partidos" Type="Self.partidos" Multiplicity="1" />
+    <End Role="partidos1" Type="Self.partidos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="partidos">
+        <PropertyRef Name="id_partido" />
+      </Principal>
+      <Dependent Role="partidos1">
+        <PropertyRef Name="id_tipo_partido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_partidos_tipo_partidos">
+    <End Role="tipo_partidos" Type="Self.tipo_partidos" Multiplicity="1" />
+    <End Role="partidos" Type="Self.partidos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipo_partidos">
+        <PropertyRef Name="id_tipo_partido" />
+      </Principal>
+      <Dependent Role="partidos">
+        <PropertyRef Name="id_tipo_partido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuarios_tipo_usuarios">
+    <End Role="tipo_usuarios" Type="Self.tipo_usuarios" Multiplicity="1" />
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tipo_usuarios">
+        <PropertyRef Name="id_tipo_usuario" />
+      </Principal>
+      <Dependent Role="usuarios">
+        <PropertyRef Name="id_tipo_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GranFranciscanoModelStoreContainer">
+    <EntitySet Name="campeonatos" EntityType="Self.campeonatos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="equipos" EntityType="Self.equipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="equipos_x_campeonato" EntityType="Self.equipos_x_campeonato" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="equipos_x_partido" EntityType="Self.equipos_x_partido" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="partidos" EntityType="Self.partidos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="preguntas" EntityType="Self.preguntas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tipo_partidos" EntityType="Self.tipo_partidos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tipo_usuarios" EntityType="Self.tipo_usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_campeonatos_equipos" Association="Self.FK_campeonatos_equipos">
+      <End Role="equipos" EntitySet="equipos" />
+      <End Role="campeonatos" EntitySet="campeonatos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_equipos_x_campeonato_campeonatos" Association="Self.FK_equipos_x_campeonato_campeonatos">
+      <End Role="campeonatos" EntitySet="campeonatos" />
+      <End Role="equipos_x_campeonato" EntitySet="equipos_x_campeonato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_equipos_x_campeonato_equipos" Association="Self.FK_equipos_x_campeonato_equipos">
+      <End Role="equipos" EntitySet="equipos" />
+      <End Role="equipos_x_campeonato" EntitySet="equipos_x_campeonato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_equipos_x_partido_equipos" Association="Self.FK_equipos_x_partido_equipos">
+      <End Role="equipos" EntitySet="equipos" />
+      <End Role="equipos_x_partido" EntitySet="equipos_x_partido" />
+    </AssociationSet>
+    <AssociationSet Name="FK_equipos_x_partido_partidos" Association="Self.FK_equipos_x_partido_partidos">
+      <End Role="partidos" EntitySet="partidos" />
+      <End Role="equipos_x_partido" EntitySet="equipos_x_partido" />
+    </AssociationSet>
+    <AssociationSet Name="FK_partidos_campeonatos" Association="Self.FK_partidos_campeonatos">
+      <End Role="campeonatos" EntitySet="campeonatos" />
+      <End Role="partidos" EntitySet="partidos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_partidos_partidos" Association="Self.FK_partidos_partidos">
+      <End Role="partidos" EntitySet="partidos" />
+      <End Role="partidos1" EntitySet="partidos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_partidos_tipo_partidos" Association="Self.FK_partidos_tipo_partidos">
+      <End Role="tipo_partidos" EntitySet="tipo_partidos" />
+      <End Role="partidos" EntitySet="partidos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuarios_tipo_usuarios" Association="Self.FK_usuarios_tipo_usuarios">
+      <End Role="tipo_usuarios" EntitySet="tipo_usuarios" />
+      <End Role="usuarios" EntitySet="usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

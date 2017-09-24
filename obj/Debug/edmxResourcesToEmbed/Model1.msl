@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GranFranciscanoModelStoreContainer" CdmEntityContainer="GranFranciscanoEntities">
+    <EntitySetMapping Name="campeonatos">
+      <EntityTypeMapping TypeName="GranFranciscanoModel.campeonatos">
+        <MappingFragment StoreEntitySet="campeonatos">
+          <ScalarProperty Name="id_campeonato" ColumnName="id_campeonato" />
+          <ScalarProperty Name="anio_campeonato" ColumnName="anio_campeonato" />
+          <ScalarProperty Name="cantidad_equipos" ColumnName="cantidad_equipos" />
+          <ScalarProperty Name="id_equipo_campeon" ColumnName="id_equipo_campeon" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="equipos">
+      <EntityTypeMapping TypeName="GranFranciscanoModel.equipos">
+        <MappingFragment StoreEntitySet="equipos">
+          <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
+          <ScalarProperty Name="equipo" ColumnName="equipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="partidos">
+      <EntityTypeMapping TypeName="GranFranciscanoModel.partidos">
+        <MappingFragment StoreEntitySet="partidos">
+          <ScalarProperty Name="id_partido" ColumnName="id_partido" />
+          <ScalarProperty Name="fec_partido" ColumnName="fec_partido" />
+          <ScalarProperty Name="equipos_pasan" ColumnName="equipos_pasan" />
+          <ScalarProperty Name="id_tipo_partido" ColumnName="id_tipo_partido" />
+          <ScalarProperty Name="id_campeonato" ColumnName="id_campeonato" />
+          <ScalarProperty Name="id_partido_padre" ColumnName="id_partido_padre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="preguntas">
+      <EntityTypeMapping TypeName="GranFranciscanoModel.preguntas">
+        <MappingFragment StoreEntitySet="preguntas">
+          <ScalarProperty Name="id_pregunta" ColumnName="id_pregunta" />
+          <ScalarProperty Name="pregunta" ColumnName="pregunta" />
+          <ScalarProperty Name="respueta" ColumnName="respueta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipo_partidos">
+      <EntityTypeMapping TypeName="GranFranciscanoModel.tipo_partidos">
+        <MappingFragment StoreEntitySet="tipo_partidos">
+          <ScalarProperty Name="id_tipo_partido" ColumnName="id_tipo_partido" />
+          <ScalarProperty Name="tipo_partido" ColumnName="tipo_partido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipo_usuarios">
+      <EntityTypeMapping TypeName="GranFranciscanoModel.tipo_usuarios">
+        <MappingFragment StoreEntitySet="tipo_usuarios">
+          <ScalarProperty Name="id_tipo_usuario" ColumnName="id_tipo_usuario" />
+          <ScalarProperty Name="tipo_usuario" ColumnName="tipo_usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuarios">
+      <EntityTypeMapping TypeName="GranFranciscanoModel.usuarios">
+        <MappingFragment StoreEntitySet="usuarios">
+          <ScalarProperty Name="id_usario" ColumnName="id_usario" />
+          <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+          <ScalarProperty Name="contrasenia" ColumnName="contrasenia" />
+          <ScalarProperty Name="fec_registro" ColumnName="fec_registro" />
+          <ScalarProperty Name="id_tipo_usuario" ColumnName="id_tipo_usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="equipos_x_campeonato" TypeName="GranFranciscanoModel.equipos_x_campeonato" StoreEntitySet="equipos_x_campeonato">
+      <EndProperty Name="campeonatos">
+        <ScalarProperty Name="id_campeonato" ColumnName="id_campeonato" />
+      </EndProperty>
+      <EndProperty Name="equipos">
+        <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="equipos_x_partido" TypeName="GranFranciscanoModel.equipos_x_partido" StoreEntitySet="equipos_x_partido">
+      <EndProperty Name="equipos">
+        <ScalarProperty Name="id_equipo" ColumnName="id_equipo" />
+      </EndProperty>
+      <EndProperty Name="partidos">
+        <ScalarProperty Name="id_partido" ColumnName="id_partido" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

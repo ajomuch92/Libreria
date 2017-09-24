@@ -1,0 +1,8 @@
+C:\Users\Aarón\Documents\WebMatrix Solutions\Projects\Libreria\bin\Debug\Libreria.dll.config
+C:\Users\Aarón\Documents\WebMatrix Solutions\Projects\Libreria\bin\Debug\Libreria.dll
+C:\Users\Aarón\Documents\WebMatrix Solutions\Projects\Libreria\bin\Debug\Libreria.pdb
+C:\Users\Aarón\Documents\WebMatrix Solutions\Projects\Libreria\bin\Debug\EntityFramework.dll
+C:\Users\Aarón\Documents\WebMatrix Solutions\Projects\Libreria\bin\Debug\EntityFramework.xml
+C:\Users\Aarón\Documents\WebMatrix Solutions\Projects\Libreria\obj\Debug\Libreria.csprojResolveAssemblyReference.cache
+C:\Users\Aarón\Documents\WebMatrix Solutions\Projects\Libreria\obj\Debug\Libreria.dll
+C:\Users\Aarón\Documents\WebMatrix Solutions\Projects\Libreria\obj\Debug\Libreria.pdb
